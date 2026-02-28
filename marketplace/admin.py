@@ -98,11 +98,15 @@ class MarketplaceSettingsAdmin(admin.ModelAdmin):
             obj = get_marketplace_settings()
         except Exception as e:
             logger.exception("MarketplaceSettings get_marketplace_settings failed: %s", e)
-            if not MarketplaceSettings.objects.exists():
-                return redirect(reverse("admin:marketplace_marketplace_settings_add"))
+            try:
+                has_any = MarketplaceSettings.objects.exists()
+            except Exception:
+                has_any = False
+            if not has_any:
+                return redirect(reverse("admin:marketplace_marketplacesettings_add"))
             messages.error(request, "Could not load marketplace settings. Check server logs.")
             return redirect(reverse("admin:index"))
-        return redirect(reverse("admin:marketplace_marketplace_settings_change", args=(obj.pk,)))
+        return redirect(reverse("admin:marketplace_marketplacesettings_change", args=(obj.pk,)))
 
 
 @admin.register(ProviderProfile)
