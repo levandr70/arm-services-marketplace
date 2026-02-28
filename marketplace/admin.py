@@ -94,7 +94,14 @@ class MarketplaceSettingsAdmin(admin.ModelAdmin):
         return False
 
     def changelist_view(self, request, extra_context=None):
-        obj = get_marketplace_settings()
+        try:
+            obj = get_marketplace_settings()
+        except Exception as e:
+            logger.exception("MarketplaceSettings get_marketplace_settings failed: %s", e)
+            if not MarketplaceSettings.objects.exists():
+                return redirect(reverse("admin:marketplace_marketplace_settings_add"))
+            messages.error(request, "Could not load marketplace settings. Check server logs.")
+            return redirect(reverse("admin:index"))
         return redirect(reverse("admin:marketplace_marketplace_settings_change", args=(obj.pk,)))
 
 
