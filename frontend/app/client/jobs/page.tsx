@@ -61,7 +61,7 @@ function jobCreatedAt(job: JobListItem): string {
   return formatDate(job.created_at ?? null);
 }
 
-type StatusFilter = "all" | "open" | "cancelled" | "deleted";
+type StatusFilter = "all" | "open" | "assigned" | "cancelled" | "closed" | "deleted";
 
 export default function ClientJobsPage() {
   const { tokens } = useAuth();
