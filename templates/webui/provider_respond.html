@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load formatters %}
+{% block title %}Respond to {{ job.title }} – Armenia Services Marketplace{% endblock %}
+{% block content %}
+<h1>Respond to job</h1>
+
+<div class="card job-summary">
+  <h2>{{ job.title }}</h2>
+  <p class="muted">{{ job.get_city_display }} · {{ job.get_category_display }} · {{ job|budget }}</p>
+  <p>{{ job.description }}</p>
+  <p class="muted">Cost to respond: {{ job.response_price_credits }} credit</p>
+</div>
+
+<div class="card topbar-card">
+  <span class="credits">Your balance: {{ credits_balance }} credits</span>
+  {% if credits_balance < job.response_price_credits %}
+  <span class="muted">(Not enough credits to respond)</span>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h2>Your response</h2>
+  <form method="post" action="{% url 'webui:provider_respond' job.id %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_cover_message">Cover message</label>
+      {{ form.cover_message }}
+    </div>
+    <div class="form-group">
+      <label for="id_proposed_price_amd">Proposed price (AMD)</label>
+      {{ form.proposed_price_amd }}
+    </div>
+    <div class="form-group">
+      <label for="id_timeline_text">Timeline</label>
+      {{ form.timeline_text }}
+    </div>
+    <p>
+      <button type="submit" class="btn btn-primary" {% if credits_balance < job.response_price_credits %}disabled{% endif %}>Submit response ({{ job.response_price_credits }} credit)</button>
+    </p>
+  </form>
+</div>
+
+<p><a href="{% url 'webui:provider_dashboard' %}" class="btn btn-secondary">Back to dashboard</a></p>
+{% endblock %}

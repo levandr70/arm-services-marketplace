@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load formatters %}
+{% block title %}{{ job.title }} – Armenia Services Marketplace{% endblock %}
+{% block content %}
+<div class="card job-summary">
+  <h1>{{ job.title }}</h1>
+  <p><span class="badge badge-{{ job.status }}">{{ job.get_status_display }}</span> <span class="muted">· {{ job.get_category_display }} · {{ job.get_city_display }}</span></p>
+  <p>{{ job.description }}</p>
+  <p class="muted">Budget: {{ job|budget }}</p>
+  {% if job.deadline_date %}<p class="muted">Deadline: {{ job.deadline_date }}</p>{% endif %}
+  <p class="muted">Visibility: {{ job.get_visibility_display }} · {{ job.responses_count }} response(s)</p>
+</div>
+
+<h2>Responses</h2>
+{% for resp in responses %}
+<div class="card response-card">
+  <p class="meta">
+    <strong>{{ resp.provider.full_name }}</strong> ({{ resp.provider.email }})
+    <span class="badge badge-{{ resp.decision_status }}">{{ resp.get_decision_status_display }}</span>
+    {% if resp.viewed_by_client_at %}<span class="muted">· Viewed {{ resp.viewed_by_client_at|date:"M d, Y H:i" }}</span>{% endif %}
+  </p>
+  <p><strong>Proposed price:</strong> {% if resp.proposed_price_amd %}{{ resp.proposed_price_amd|amd }} AMD{% else %}—{% endif %}</p>
+  <p><strong>Timeline:</strong> {{ resp.timeline_text|default:"—" }}</p>
+  <p><strong>Cover:</strong> {{ resp.cover_message|default:"—" }}</p>
+  {% if job.status == 'open' and resp.decision_status == 'pending' %}
+  <div class="actions-inline">
+    <form method="post" action="{% url 'webui:client_accept_reject' job.id %}" onsubmit="return confirm('Accept this response? The job will be assigned and other responses rejected.');">
+      {% csrf_token %}
+      <input type="hidden" name="response_id" value="{{ resp.id }}">
+      <input type="hidden" name="decision_status" value="accepted">
+      <button type="submit" class="btn btn-primary">Accept</button>
+    </form>
+    <form method="post" action="{% url 'webui:client_accept_reject' job.id %}" onsubmit="return confirm('Reject this response?');">
+      {% csrf_token %}
+      <input type="hidden" name="response_id" value="{{ resp.id }}">
+      <input type="hidden" name="decision_status" value="rejected">
+      <button type="submit" class="btn btn-secondary">Reject</button>
+    </form>
+  </div>
+  {% endif %}
+</div>
+{% empty %}
+<p class="muted">No responses yet.</p>
+{% endfor %}
+
+<p><a href="{% url 'webui:client_dashboard' %}" class="btn btn-secondary">Back to my jobs</a></p>
+{% endblock %}

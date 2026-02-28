@@ -1,0 +1,170 @@
+/* Armenia Services Marketplace – Web UI */
+* { box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  line-height: 1.5;
+  color: #212529;
+}
+h1 { font-size: 1.5rem; margin-top: 0; margin-bottom: 1rem; }
+h2 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; }
+
+a { color: #0d6efd; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Messages */
+.msg {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+}
+.msg.success { background: #d1e7dd; color: #0a3622; }
+.msg.error { background: #f8d7da; color: #58151c; }
+.messages { margin-bottom: 1rem; }
+.field-errors { color: #dc3545; font-size: 0.875rem; margin-top: 0.25rem; }
+.field-errors ul { margin: 0; padding-left: 1.25rem; }
+
+/* Cards */
+.card {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  background: #fff;
+}
+.card h3 { margin: 0 0 0.5rem 0; font-size: 1.1rem; }
+.card-title { font-size: 1.1rem; font-weight: 600; margin: 0 0 0.5rem 0; }
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+.badge-open { background: #cfe2ff; color: #084298; }
+.badge-assigned { background: #fff3cd; color: #664d03; }
+.badge-closed { background: #e2e3e5; color: #41464b; }
+.badge-cancelled { background: #f8d7da; color: #58151c; }
+.badge-pending { background: #cfe2ff; color: #084298; }
+.badge-accepted { background: #d1e7dd; color: #0a3622; }
+.badge-rejected { background: #f8d7da; color: #58151c; }
+.badge-verified { background: #d1e7dd; color: #0a3622; }
+.badge-pending-status { background: #e2e3e5; color: #41464b; }
+
+/* Muted text */
+.muted { color: #6c757d; font-size: 0.875rem; }
+
+/* Buttons */
+.btn, button[type="submit"]:not([disabled]) {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  line-height: 1.5;
+}
+.btn-primary, .btn, button[type="submit"]:not([disabled]) {
+  background: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+.btn-primary:hover, .btn:hover, button[type="submit"]:not([disabled]):hover {
+  background: #0b5ed7;
+  border-color: #0a58ca;
+  color: #fff;
+}
+.btn-secondary { background: #6c757d; color: #fff; border-color: #6c757d; }
+.btn-secondary:hover { background: #5c636a; color: #fff; }
+.btn-danger { background: #dc3545; color: #fff; border-color: #dc3545; }
+.btn-danger:hover { background: #bb2d3b; color: #fff; }
+.btn:disabled, button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Nav */
+.nav {
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #dee2e6;
+}
+.nav a { margin-right: 1rem; }
+.nav span { margin-right: 1rem; color: #6c757d; font-size: 0.9rem; }
+
+/* Forms */
+.form-group { margin-bottom: 1rem; }
+.form-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #86b7fe;
+  outline: 0;
+}
+textarea { min-height: 100px; resize: vertical; }
+form .form-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+form .form-row .form-group { flex: 1; min-width: 140px; }
+
+/* Filters */
+.filters {
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+.filters .form-row { margin-bottom: 0.5rem; }
+.filters input, .filters select {
+  max-width: 180px;
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+.filters label { display: inline; margin-right: 0.5rem; font-weight: 500; }
+
+/* Top bar (provider) */
+.topbar-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+}
+.topbar-card .credits { font-size: 1.25rem; font-weight: 600; margin: 0; }
+.topbar-card .verification { font-size: 0.9375rem; }
+
+/* Response cards */
+.response-card { margin-bottom: 1rem; }
+.response-card .meta { margin-bottom: 0.5rem; }
+.actions-inline { margin-top: 0.75rem; }
+.actions-inline form { display: inline; margin-right: 0.5rem; }
+
+/* Job summary */
+.job-summary .muted { margin-bottom: 0.25rem; }

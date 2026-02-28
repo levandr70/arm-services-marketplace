@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load formatters %}
+{% block title %}Provider dashboard – Armenia Services Marketplace{% endblock %}
+{% block content %}
+<h1>Provider dashboard</h1>
+
+<div class="topbar-card">
+  <div>
+    <span class="credits">Credits: {{ credits_balance }}</span>
+  </div>
+  <div class="verification">
+    <span class="badge {% if verification_status == 'verified' %}badge-verified{% else %}badge-pending-status{% endif %}">{{ verification_status|default:"pending" }}</span>
+  </div>
+</div>
+
+<form method="get" action="{% url 'webui:provider_dashboard' %}" class="filters">
+  <div class="form-row">
+    <label>Category
+      <select name="category">
+        <option value="">All</option>
+        {% for value, label in category_choices %}
+        <option value="{{ value }}" {% if get_category == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>City
+      <select name="city">
+        <option value="">All</option>
+        {% for value, label in city_choices %}
+        <option value="{{ value }}" {% if get_city == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Budget min (AMD) <input type="number" name="budget_min_amd" value="{{ get_budget_min }}" placeholder="15000" min="0"></label>
+    <label>Budget max (AMD) <input type="number" name="budget_max_amd" value="{{ get_budget_max }}" placeholder="50000" min="0"></label>
+    <button type="submit" class="btn btn-primary">Filter</button>
+  </div>
+</form>
+
+<h2>Open jobs</h2>
+{% for job in jobs %}
+<div class="card">
+  <h3>{{ job.title }}</h3>
+  <p>
+    <span class="badge badge-open">{{ job.get_status_display }}</span>
+    <span class="muted"> · {{ job.get_city_display }} · {{ job.get_category_display }}</span>
+  </p>
+  <p class="muted">Budget: {{ job|budget }}</p>
+  <p class="muted">{{ job.responses_count }} provider{{ job.responses_count|pluralize }} responded · Cost: {{ job.response_price_credits }} credit</p>
+  {% if job.id in responded_job_ids %}
+  <p><span class="muted">Already responded</span></p>
+  {% elif credits_balance < job.response_price_credits %}
+  <p><button type="button" class="btn btn-primary" disabled>Respond</button> <span class="muted">Not enough credits</span></p>
+  {% else %}
+  <p><a href="{% url 'webui:provider_respond' job.id %}" class="btn btn-primary">Respond</a></p>
+  {% endif %}
+</div>
+{% empty %}
+<p class="muted">No open jobs match your filters.</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Armenia Services Marketplace{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'webui/app.css' %}">
+</head>
+<body>
+  <nav class="nav">
+    {% if user.is_authenticated %}
+      <span>{{ user.email }} <span class="muted">({{ user.get_role_display }})</span></span>
+      <a href="{% url 'webui:logout' %}">Log out</a>
+    {% else %}
+      <a href="{% url 'webui:login' %}">Log in</a>
+      <a href="{% url 'webui:register' %}">Register</a>
+    {% endif %}
+  </nav>
+  <div class="container">
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="msg {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

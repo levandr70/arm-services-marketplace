@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Armenia Services Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-size: 20px; }
+    </style>
+</head>
+<body class="bg-white text-slate-900 font-display">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 px-6 lg:px-20 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg text-white">
+<span class="material-symbols-outlined">handyman</span>
+</div>
+<h2 class="text-slate-900 text-xl font-bold tracking-tight">Armenia Services Marketplace</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors" href="#">Find Service</a>
+<a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors" href="#">Post Task</a>
+<a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors" href="#">How it Works</a>
+<a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors" href="#">Reviews</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg transition-colors">Log In</button>
+<button class="bg-primary text-white px-5 py-2 rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">Join as Executor</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative py-20 px-6 lg:px-20">
+<div class="max-w-4xl mx-auto text-center flex flex-col items-center">
+<h1 class="text-5xl lg:text-7xl font-black text-slate-900 tracking-tight mb-6">
+                    We take care of <span class="text-primary">the hassle</span>
+</h1>
+<p class="text-lg lg:text-xl text-slate-500 mb-10 max-w-2xl">
+                    Find a reliable executor for any task across Armenia. From plumbing to professional consulting.
+                </p>
+<!-- Search Bar Component -->
+<div class="w-full max-w-2xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 rounded-2xl p-2 flex flex-col md:flex-row gap-2">
+<div class="flex-1 flex items-center px-4 gap-3 border-r border-slate-100">
+<span class="material-symbols-outlined text-slate-400">search</span>
+<input class="w-full border-none focus:ring-0 text-slate-800 placeholder:text-slate-400 py-3" placeholder="Service or specialist" type="text"/>
+</div>
+<button class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-primary/90 transition-all">
+                        Find
+                    </button>
+</div>
+<p class="mt-6 text-slate-400 text-sm">
+                    Executors with honest reviews in categories: <span class="text-slate-600 font-medium italic">Plumbing, Repair, Cleaning, Construction and more</span>
+</p>
+<div class="mt-8">
+<button class="group flex items-center gap-2 px-8 py-4 border-2 border-slate-200 rounded-xl text-slate-700 font-bold hover:border-primary hover:text-primary transition-all">
+                        Post a task
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Categories Section -->
+<section class="py-12 px-6 lg:px-20 bg-slate-50">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
+<h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">category</span>
+                        In categories:
+                    </h3>
+<a class="text-primary font-semibold text-sm hover:underline flex items-center gap-1" href="#">
+                        View all services
+                        <span class="material-symbols-outlined !text-sm">open_in_new</span>
+</a>
+</div>
+<div class="flex flex-wrap gap-3 justify-center md:justify-start">
+<button class="px-6 py-2.5 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-600 hover:border-primary hover:text-primary transition-all shadow-sm">Plumbing</button>
+<button class="px-6 py-2.5 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-600 hover:border-primary hover:text-primary transition-all shadow-sm">Electrical</button>
+<button class="px-6 py-2.5 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-600 hover:border-primary hover:text-primary transition-all shadow-sm">Cleaning</button>
+<button class="px-6 py-2.5 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-600 hover:border-primary hover:text-primary transition-all shadow-sm">Repair</button>
+<button class="px-6 py-2.5 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-600 hover:border-primary hover:text-primary transition-all shadow-sm">Construction</button>
+<button class="px-6 py-2.5 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-600 hover:border-primary hover:text-primary transition-all shadow-sm">Other</button>
+</div>
+</div>
+</section>
+<!-- Trust Strip -->
+<section class="py-16 px-6 lg:px-20 border-y border-slate-100">
+<div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="text-center">
+<div class="text-4xl font-black text-primary mb-1">6+</div>
+<div class="text-slate-900 font-bold text-sm">Service categories</div>
+</div>
+<div class="text-center">
+<div class="text-4xl font-black text-primary mb-1">Armenia</div>
+<div class="text-slate-900 font-bold text-sm">Clients and executors across regions</div>
+</div>
+<div class="text-center">
+<div class="text-4xl font-black text-primary mb-1">Verified</div>
+<div class="text-slate-900 font-bold text-sm">Ratings and badges for executors</div>
+</div>
+<div class="text-center">
+<div class="text-4xl font-black text-primary mb-1">Secure</div>
+<div class="text-slate-900 font-bold text-sm">Safe payment and trusted deals</div>
+</div>
+</div>
+</section>
+<!-- How It Works Section -->
+<section class="py-24 px-6 lg:px-20">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-16">
+<h2 class="text-3xl lg:text-4xl font-black text-slate-900 mb-4">How does it work?</h2>
+<p class="text-slate-500 max-w-xl mx-auto">You choose only among interested executors by reviews, prices and work samples</p>
+</div>
+<div class="grid md:grid-cols-3 gap-12 mb-16">
+<div class="relative flex flex-col items-center text-center p-8 rounded-2xl bg-slate-50">
+<div class="absolute -top-6 bg-primary text-white size-12 rounded-full flex items-center justify-center font-black text-xl shadow-lg">1</div>
+<h4 class="text-lg font-bold text-slate-900 mt-4 mb-3">Describe your task and conditions</h4>
+<p class="text-slate-500 text-sm leading-relaxed">It’s free and takes 3–4 minutes to fill out the requirements.</p>
+</div>
+<div class="relative flex flex-col items-center text-center p-8 rounded-2xl bg-slate-50">
+<div class="absolute -top-6 bg-primary text-white size-12 rounded-full flex items-center justify-center font-black text-xl shadow-lg">2</div>
+<h4 class="text-lg font-bold text-slate-900 mt-4 mb-3">Get responses with prices</h4>
+<p class="text-slate-500 text-sm leading-relaxed">Executors usually arrive with offers within 30 minutes of posting.</p>
+</div>
+<div class="relative flex flex-col items-center text-center p-8 rounded-2xl bg-slate-50">
+<div class="absolute -top-6 bg-primary text-white size-12 rounded-full flex items-center justify-center font-black text-xl shadow-lg">3</div>
+<h4 class="text-lg font-bold text-slate-900 mt-4 mb-3">Choose the right executor</h4>
+<p class="text-slate-500 text-sm leading-relaxed">Discuss details, agree on timing and get the job done reliably.</p>
+</div>
+</div>
+<div class="flex justify-center">
+<button class="bg-primary/10 text-primary px-10 py-4 rounded-xl font-bold hover:bg-primary/20 transition-all">Learn more</button>
+</div>
+</div>
+</section>
+<!-- Reviews Section -->
+<section class="py-24 px-6 lg:px-20 bg-slate-50">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-3xl font-black text-slate-900 mb-12 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary scale-125">star</span>
+                    Reviews about executors
+                </h2>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-full">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-slate-900 text-lg">Plumbing repair</h4>
+<span class="text-xs text-primary font-bold uppercase tracking-wider">Found in 15 mins</span>
+</div>
+<div class="text-right font-black text-primary">15,000 AMD</div>
+</div>
+<p class="text-slate-600 text-sm italic mb-6 flex-grow">"Fast and professional service. The leaking pipe was fixed within an hour of the call. Highly recommended for urgent fixes."</p>
+<div class="flex items-center gap-4 pt-6 border-t border-slate-50">
+<div class="size-10 bg-slate-100 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">person</span>
+</div>
+<div>
+<div class="font-bold text-slate-900 text-sm">Alex M.</div>
+<div class="text-xs text-slate-400 flex items-center gap-1">
+<span class="text-amber-400 font-bold">Rating: 5</span> • Jan 2025 • 42 tasks
+                                </div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-full">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-slate-900 text-lg">Apartment cleaning</h4>
+<span class="text-xs text-primary font-bold uppercase tracking-wider">Found in 1 hour</span>
+</div>
+<div class="text-right font-black text-primary">8,000 AMD</div>
+</div>
+<p class="text-slate-600 text-sm italic mb-6 flex-grow">"Very thorough cleaning. Every corner was sparkling. Maria was very polite and organized."</p>
+<div class="flex items-center gap-4 pt-6 border-t border-slate-50">
+<div class="size-10 bg-slate-100 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">person</span>
+</div>
+<div>
+<div class="font-bold text-slate-900 text-sm">Maria K.</div>
+<div class="text-xs text-slate-400 flex items-center gap-1">
+<span class="text-amber-400 font-bold">Rating: 5</span> • Jan 2025 • 128 tasks
+                                </div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-full">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-slate-900 text-lg">Furniture assembly</h4>
+<span class="text-xs text-primary font-bold uppercase tracking-wider">Found in 30 mins</span>
+</div>
+<div class="text-right font-black text-primary">12,000 AMD</div>
+</div>
+<p class="text-slate-600 text-sm italic mb-6 flex-grow">"Assembled correctly and quickly. Brought all the necessary tools. Very satisfied with the David's work."</p>
+<div class="flex items-center gap-4 pt-6 border-t border-slate-50">
+<div class="size-10 bg-slate-100 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">person</span>
+</div>
+<div>
+<div class="font-bold text-slate-900 text-sm">David S.</div>
+<div class="text-xs text-slate-400 flex items-center gap-1">
+<span class="text-amber-400 font-bold">Rating: 4.9</span> • Dec 2024 • 89 tasks
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-white pt-20 pb-10 px-6 lg:px-20 border-t border-slate-100">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
+<div class="flex flex-col gap-4">
+<h5 class="font-bold text-slate-900 uppercase text-xs tracking-widest">For executors</h5>
+<ul class="flex flex-col gap-3">
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">Become an executor</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">Success stories</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">Pro benefits</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-bold text-slate-900 uppercase text-xs tracking-widest">Support</h5>
+<ul class="flex flex-col gap-3">
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">Help center</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">Safety guide</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">Contact us</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-bold text-slate-900 uppercase text-xs tracking-widest">Company</h5>
+<ul class="flex flex-col gap-3">
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">About us</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">Careers</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">Press</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-bold text-slate-900 uppercase text-xs tracking-widest">Legal</h5>
+<ul class="flex flex-col gap-3">
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">Privacy policy</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">Terms of use</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm" href="#">Cookies</a></li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-10 border-t border-slate-50">
+<p class="text-slate-400 text-sm">© 2025 Armenia Services Marketplace. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">chat</span>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
