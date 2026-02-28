@@ -134,7 +134,8 @@ CORS_ALLOW_ALL_ORIGINS = DEBUG
 if not DEBUG:
     _cors_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "").strip()
     if _cors_origins:
-        CORS_ALLOWED_ORIGINS = [o.strip() for o in _cors_origins.split(",") if o.strip()]
+        # django-cors-headers forbids origins with a path (e.g. trailing slash); strip it
+        CORS_ALLOWED_ORIGINS = [o.strip().rstrip("/") for o in _cors_origins.split(",") if o.strip()]
 
 # Logging
 LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
