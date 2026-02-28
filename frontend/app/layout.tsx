@@ -4,6 +4,8 @@ import { AuthProvider } from "@/components/AuthProvider";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Armenia Services Marketplace",
   description: "Armenia-only services marketplace",
