@@ -119,7 +119,7 @@ export default function ProviderFeedPage() {
           setJobs([]);
           setFeedError("");
         } else {
-          const list = Array.isArray((feedData as FeedResponse)?.results) ? (feedData as FeedResponse).results : [];
+          const list = Array.isArray((feedData as FeedResponse)?.results) ? (feedData as FeedResponse).results ?? [] : [];
           setJobs(list);
           setTotalCount((feedData as FeedResponse)?.count ?? null);
           setNextUrl((feedData as FeedResponse)?.next ?? null);
