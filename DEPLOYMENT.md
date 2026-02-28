@@ -6,7 +6,7 @@ This guide helps you deploy the app with **minimal budget** (testing stage). All
 
 ## Quick summary – your steps
 
-1. **Backend (Render):** New Web Service → connect repo → set **Root** to repo root → Build: `pip install -r requirements.txt && python manage.py collectstatic --noinput` → Start: `gunicorn core.wsgi --bind 0.0.0.0:$PORT` → Add env vars (`SECRET_KEY`, `DEBUG=0`, `ALLOWED_HOSTS`, `CORS_ALLOWED_ORIGINS`) → Deploy → run `python manage.py migrate` and `createsuperuser` in Shell.
+1. **Backend (Render):** New Web Service → connect repo → set **Root** to repo root → Build: `pip install -r requirements.txt && python manage.py collectstatic --noinput` → Start: `bash scripts/start.sh` → Add env vars (`SECRET_KEY`, `DEBUG=0`, `ALLOWED_HOSTS`, `CORS_ALLOWED_ORIGINS`; optional: `DJANGO_SUPERUSER_EMAIL`, `DJANGO_SUPERUSER_PASSWORD`, `DJANGO_SUPERUSER_FULL_NAME` for admin on free tier) → Deploy (migrations and superuser run automatically).
 2. **Frontend (Vercel):** Import repo → set **Root Directory** to `frontend` → Add env `NEXT_PUBLIC_API_BASE_URL` = your Render backend URL → Deploy.
 3. **CORS:** Set `CORS_ALLOWED_ORIGINS` on backend to your Vercel URL (e.g. `https://your-app.vercel.app`).
 
@@ -54,9 +54,10 @@ Ensure the repo has the project root (with `manage.py`, `requirements.txt`, `Pro
      ```
    - **Start Command:**
      ```bash
-     gunicorn core.wsgi --bind 0.0.0.0:$PORT
+     bash scripts/start.sh
      ```
-     (Or leave start command empty if you use the **Procfile**; Render will use it.)
+     This runs migrations, optionally creates a superuser (if env vars below are set), then starts Gunicorn. No Shell needed on free tier.
+     (Alternative: `python manage.py migrate --noinput && gunicorn core.wsgi --bind 0.0.0.0:$PORT` if you don’t need auto superuser.)
    - **Instance Type:** Free.
 
 ### 3. Environment variables (Backend)
@@ -71,6 +72,17 @@ In Render → your Web Service → **Environment** → **Add Environment Variabl
 | `CORS_ALLOWED_ORIGINS` | `https://your-frontend.vercel.app` (your Vercel URL; add more comma-separated if needed) | Yes |
 | `SECURE_SSL_REDIRECT` | `1` | Recommended |
 
+**Optional – create Django admin user on free tier (no Shell):**  
+Add these so the start script can create a superuser automatically. Our User model uses **email** and **full_name**:
+
+| Key | Value |
+|-----|--------|
+| `DJANGO_SUPERUSER_EMAIL` | Your admin email (e.g. `admin@example.com`) |
+| `DJANGO_SUPERUSER_PASSWORD` | A strong password for the admin user |
+| `DJANGO_SUPERUSER_FULL_NAME` | Display name (e.g. `Admin`) |
+
+If these are set, the first deploy (or first start after DB reset) will create that user. Later starts skip creation if the user already exists.
+
 **For database:**
 
 - **SQLite (simplest, free):** Do **not** set `DB_NAME`. Render’s free tier has ephemeral disk, so data resets on deploy. Fine for testing.
@@ -79,14 +91,10 @@ In Render → your Web Service → **Environment** → **Add Environment Variabl
 
 Save. Render will redeploy.
 
-### 4. Run migrations (first time)
+### 4. Migrations and superuser (first time)
 
-In Render → your Web Service → **Shell** (or use a one-off job), run:
-
-```bash
-python manage.py migrate
-python manage.py createsuperuser
-```
+- **If you use the start script** (`bash scripts/start.sh`) and set `DJANGO_SUPERUSER_EMAIL`, `DJANGO_SUPERUSER_PASSWORD`, and `DJANGO_SUPERUSER_FULL_NAME`: migrations and superuser creation run automatically on every deploy. No Shell needed (works on free tier).
+- **If you prefer Shell:** upgrade to a plan with Shell access, then run `python manage.py migrate` and `python manage.py createsuperuser` once.
 
 If you use **SQLite**, the shell may not persist the same filesystem as the web process; for production persistence use PostgreSQL.
 
@@ -131,10 +139,10 @@ Redeploy the backend if needed so CORS allows your frontend origin.
 
 ## Your deployment checklist
 
-- [ ] Backend on Render: build = `pip install -r requirements.txt && python manage.py collectstatic --noinput`, start = `gunicorn core.wsgi --bind 0.0.0.0:$PORT`
-- [ ] Backend env: `SECRET_KEY`, `DEBUG=0`, `ALLOWED_HOSTS`, `CORS_ALLOWED_ORIGINS`, `SECURE_SSL_REDIRECT=1`
+- [ ] Backend on Render: build = `pip install -r requirements.txt && python manage.py collectstatic --noinput`, start = `bash scripts/start.sh`
+- [ ] Backend env: `SECRET_KEY`, `DEBUG=0`, `ALLOWED_HOSTS`, `CORS_ALLOWED_ORIGINS`, `SECURE_SSL_REDIRECT=1`; optional: `DJANGO_SUPERUSER_EMAIL`, `DJANGO_SUPERUSER_PASSWORD`, `DJANGO_SUPERUSER_FULL_NAME` for admin user on free tier
 - [ ] Database: either SQLite (no `DB_NAME`) or Render Postgres with `DB_*` set
-- [ ] Migrations and superuser run once on backend
+- [ ] Migrations (and superuser if env vars set) run via start script; or use Shell once if upgraded
 - [ ] Frontend on Vercel with root directory = `frontend`
 - [ ] Frontend env: `NEXT_PUBLIC_API_BASE_URL` = your backend URL
 - [ ] CORS includes your frontend URL
