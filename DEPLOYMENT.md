@@ -231,6 +231,12 @@ npm start
 
 ## Troubleshooting
 
+- **Bad Gateway (502) from Render:**  
+  - **Cold start (most common):** On the free tier the service sleeps after ~15 minutes of no traffic. The **first request** after that can return "Bad Gateway" or "Service unavailable" for **30–90 seconds** while the instance starts. **Wait 1–2 minutes and try again** (or hit the API root or `/api/health/` until it responds).  
+  - **Check Render dashboard:** Open your Web Service → **Logs** and **Events**. If the last deploy failed (build or start), you’ll see errors there. Fix build command, start command, or env vars and redeploy.  
+  - **Env vars:** Ensure `ALLOWED_HOSTS` includes your Render host (e.g. `arm-marketplace-api.onrender.com`). If you use PostgreSQL, ensure `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT` are set (or use Render’s “Internal Database URL” and map it to these vars).  
+  - **Health check (optional):** In Render → Service → **Settings** → **Health Check Path**, set `/api/health/`. Render will poll that URL to know when the app is ready and may reduce 502s during deploys.
+
 - **CORS errors in browser:** Ensure `CORS_ALLOWED_ORIGINS` exactly matches the frontend origin (scheme + host, no trailing slash), and backend was redeployed after changing env.
 - **502 / App failed to start:** Check Render logs. Ensure `PORT` is used (Render sets it); start command must be `gunicorn core.wsgi --bind 0.0.0.0:$PORT`.
 - **Static files (admin):** `collectstatic` runs at build; WhiteNoise serves static. If admin CSS is missing, confirm build command includes `python manage.py collectstatic --noinput`.

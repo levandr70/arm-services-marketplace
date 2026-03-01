@@ -34,7 +34,13 @@ export default function RegisterPage() {
       router.push(loginUrl);
       router.refresh();
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Registration failed");
+      setError(
+        err instanceof ApiError
+          ? err.message
+          : err instanceof Error
+            ? err.message
+            : "Registration failed"
+      );
     } finally {
       setSubmitting(false);
     }
@@ -121,31 +127,33 @@ export default function RegisterPage() {
           </select>
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">Role</label>
-          <div className="flex gap-4">
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="role"
-                value="client"
-                checked={form.role === "client"}
-                onChange={() => setForm((f) => ({ ...f, role: "client" }))}
-                className="text-gray-900"
-              />
-              Client
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="role"
-                value="provider"
-                checked={form.role === "provider"}
-                onChange={() => setForm((f) => ({ ...f, role: "provider" }))}
-                className="text-gray-900"
-              />
-              Provider
-            </label>
-          </div>
+          <fieldset className="space-y-2">
+            <legend className="text-sm font-medium text-gray-700">Role</legend>
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="role"
+                  value="client"
+                  checked={form.role === "client"}
+                  onChange={() => setForm((f) => ({ ...f, role: "client" }))}
+                  className="text-gray-900"
+                />
+                Client
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="role"
+                  value="provider"
+                  checked={form.role === "provider"}
+                  onChange={() => setForm((f) => ({ ...f, role: "provider" }))}
+                  className="text-gray-900"
+                />
+                Provider
+              </label>
+            </div>
+          </fieldset>
         </div>
         <button
           type="submit"
