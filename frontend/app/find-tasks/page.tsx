@@ -173,9 +173,14 @@ export default function FindTasksPage() {
       </div>
 
       <form onSubmit={handleSearchSubmit} className="mb-4 flex flex-wrap items-center gap-3">
+        <label htmlFor="find-tasks-search" className="sr-only">
+          Search by keywords
+        </label>
         <input
+          id="find-tasks-search"
           type="search"
           placeholder="Search by keywords"
+          autoComplete="off"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           className="min-w-[200px] flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"

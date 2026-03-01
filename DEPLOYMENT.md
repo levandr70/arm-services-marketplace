@@ -149,6 +149,52 @@ Redeploy the backend if needed so CORS allows your frontend origin.
 
 ---
 
+## Ongoing development: making changes and deploying
+
+You **don’t have to run the app locally** to deploy. Push to GitHub and Render + Vercel will redeploy. Running locally is optional and useful for fast feedback while coding.
+
+### Option A: Develop locally (recommended for day-to-day work)
+
+1. **Backend:** In the project root, activate the venv and run:
+   ```bash
+   .venv\Scripts\activate
+   python manage.py runserver
+   ```
+2. **Frontend:** In `frontend/`, run:
+   ```bash
+   npm run dev
+   ```
+3. **Frontend talks to local backend** if `frontend/.env.local` has `NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000` (default). No need to keep production open.
+4. Make your code changes, test in the browser, then push to deploy (see below).
+
+### Option B: Deploy without running locally
+
+1. Edit code in your repo (backend in project root, frontend in `frontend/`).
+2. Commit and push to GitHub:
+   ```bash
+   git add .
+   git commit -m "Your message"
+   git push origin main
+   ```
+3. **Render** (backend) and **Vercel** (frontend) are connected to the same repo:
+   - **Render** builds from the **repo root** and redeploys the backend.
+   - **Vercel** builds from the **`frontend`** folder and redeploys the frontend.
+4. Wait a few minutes; both will update. No need to run the app locally.
+
+### Summary
+
+| Goal | What to do |
+|------|------------|
+| Code and test quickly | Run backend + frontend **locally** (runserver + npm run dev), use `.env.local` for API URL. |
+| Update production | **Push to `main`**; Render and Vercel auto-deploy. You don’t need to run the app or keep any browser tab open. |
+| Backend-only change | Push → only Render redeploys. |
+| Frontend-only change | Push → only Vercel redeploys. |
+| Both changed | One push → both redeploy. |
+
+You do **not** need to keep the backend or frontend open in a browser for deploys to work.
+
+---
+
 ## Optional: other hosts
 
 - **Railway** – Free tier ($5 credit/month). Deploy backend + optional Postgres; frontend can also run on Railway or keep on Vercel.

@@ -135,9 +135,14 @@ export default function ReviewsPage() {
       </div>
 
       <form onSubmit={handleSearchSubmit} className="flex flex-wrap items-center gap-3 rounded-xl bg-slate-50 p-3">
+        <label htmlFor="reviews-search" className="sr-only">
+          Search by executor name or email
+        </label>
         <input
+          id="reviews-search"
           type="search"
           placeholder="Search by executor name or email"
+          autoComplete="off"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           className="min-w-[200px] flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"

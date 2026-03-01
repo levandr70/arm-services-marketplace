@@ -54,6 +54,7 @@ export default function RegisterPage() {
           <input
             id="email"
             type="email"
+            autoComplete="email"
             required
             value={form.email}
             onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
@@ -67,6 +68,7 @@ export default function RegisterPage() {
           <input
             id="password"
             type="password"
+            autoComplete="new-password"
             required
             minLength={8}
             value={form.password}
@@ -81,6 +83,7 @@ export default function RegisterPage() {
           <input
             id="full_name"
             type="text"
+            autoComplete="name"
             required
             value={form.full_name}
             onChange={(e) => setForm((f) => ({ ...f, full_name: e.target.value }))}
@@ -94,6 +97,7 @@ export default function RegisterPage() {
           <input
             id="phone"
             type="text"
+            autoComplete="tel"
             value={form.phone ?? ""}
             onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
             className="w-full rounded border border-gray-300 px-3 py-2 text-gray-900 focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500"

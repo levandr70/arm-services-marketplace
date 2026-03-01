@@ -155,9 +155,14 @@ export default function ProviderFeedPage() {
         <h1 className="text-2xl font-semibold text-gray-900">Provider Feed</h1>
 
           <form onSubmit={handleSearchSubmit} className="flex flex-wrap items-center gap-3">
+            <label htmlFor="provider-feed-search" className="sr-only">
+              Search by keywords
+            </label>
             <input
+              id="provider-feed-search"
               type="search"
               placeholder="Search by keywords"
+              autoComplete="off"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               className="min-w-[200px] flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
