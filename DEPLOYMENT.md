@@ -149,6 +149,43 @@ Redeploy the backend if needed so CORS allows your frontend origin.
 
 ---
 
+## Testing after deploy (all live)
+
+Once backend (Render) and frontend (Vercel) are both live, use these steps to verify end-to-end.
+
+1. **Backend is up**  
+   Open `https://your-backend.onrender.com/api/health/` in a browser. You should see `{"ok":true}`.  
+   If you see an error or it takes 30–60 seconds, the free-tier instance may be waking up; wait and retry.
+
+2. **Open the frontend**  
+   Go to your Vercel URL (e.g. `https://your-project.vercel.app`). The home/landing page should load.
+
+3. **Register a client**  
+   - Go to **Register**.
+   - Fill email, password, full name, phone (optional), city, and choose **Client**.
+   - Submit. You should be redirected to Login (or a success message).
+   - **Login** with the same email/password. You should land on the client area (e.g. Find tasks or My jobs).
+
+4. **Register a provider**  
+   - **Logout** (if needed), then **Register** again with a **different email**.
+   - Choose **Provider** and submit.
+   - **Login** as that provider. You should land on the provider area (e.g. Feed or dashboard).
+
+5. **Client: create a job**  
+   - Logged in as **client**, go to **Create job** (or equivalent).
+   - Fill category, city, description, budget, etc. and submit. The job should appear in your jobs list and (if applicable) on the Find tasks page.
+
+6. **Provider: see jobs and respond**  
+   - Logged in as **provider**, open **Feed** or **Find tasks**. You should see jobs (e.g. the one you created as client).
+   - Open a job and **respond** (if the app has responses). Confirm the response appears.
+
+7. **Admin (optional)**  
+   - If you set `DJANGO_SUPERUSER_EMAIL` / `DJANGO_SUPERUSER_PASSWORD`, open `https://your-backend.onrender.com/admin/` and log in with that email/password. You should see Django admin (categories, cities, users, jobs, etc.).
+
+**Quick smoke test:** Backend health → Frontend loads → Register (client or provider) → Login → Create or view a job. If all of that works, the main flow is good.
+
+---
+
 ## Ongoing development: making changes and deploying
 
 You **don’t have to run the app locally** to deploy. Push to GitHub and Render + Vercel will redeploy. Running locally is optional and useful for fast feedback while coding.
