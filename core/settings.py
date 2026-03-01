@@ -136,6 +136,8 @@ if not DEBUG:
     if _cors_origins:
         # django-cors-headers forbids origins with a path (e.g. trailing slash); strip it
         CORS_ALLOWED_ORIGINS = [o.strip().rstrip("/") for o in _cors_origins.split(",") if o.strip()]
+    # Allow any Vercel deployment (production + preview URLs) so CORS works without listing every URL
+    CORS_ALLOWED_ORIGIN_REGEXES = [r"^https://[^/]+\.vercel\.app$"]
 
 # Logging
 LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()

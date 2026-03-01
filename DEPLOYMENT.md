@@ -237,7 +237,7 @@ npm start
   - **Env vars:** Ensure `ALLOWED_HOSTS` includes your Render host (e.g. `arm-marketplace-api.onrender.com`). If you use PostgreSQL, ensure `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT` are set (or use Render’s “Internal Database URL” and map it to these vars).  
   - **Health check (optional):** In Render → Service → **Settings** → **Health Check Path**, set `/api/health/`. Render will poll that URL to know when the app is ready and may reduce 502s during deploys.
 
-- **CORS errors in browser:** Ensure `CORS_ALLOWED_ORIGINS` exactly matches the frontend origin (scheme + host, no trailing slash), and backend was redeployed after changing env.
+- **CORS errors in browser / Missing Access-Control-Allow-Origin:** The backend allows any `https://*.vercel.app` origin by regex, so your main Vercel URL and preview URLs (e.g. `https://your-app-git-branch.vercel.app`) work without listing each one. Still set `CORS_ALLOWED_ORIGINS` to your production frontend URL (and any custom domains) so they are explicitly allowed. Ensure no trailing slash in origins, and redeploy the backend after changing env.
 - **502 / App failed to start:** Check Render logs. Ensure `PORT` is used (Render sets it); start command must be `gunicorn core.wsgi --bind 0.0.0.0:$PORT`.
 - **Static files (admin):** `collectstatic` runs at build; WhiteNoise serves static. If admin CSS is missing, confirm build command includes `python manage.py collectstatic --noinput`.
 - **SQLite on Render:** Free instances have ephemeral storage; data is lost on redeploy. Use PostgreSQL for persistent data.
