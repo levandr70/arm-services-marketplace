@@ -12,6 +12,8 @@ This guide helps you deploy the app with **minimal budget** (testing stage). All
 
 **Note:** On Render’s free tier the backend **spins down** after ~15 min of no traffic; the first request after that may take 30–60 seconds to wake up.
 
+**Alternative – Railway:** You can deploy the backend on [Railway](https://railway.app) instead (PostgreSQL included, persistent data). See **[Deploy backend to Railway and connect frontend](docs/RAILWAY-DEPLOY.md)** for step-by-step instructions.
+
 ---
 
 ## Minimal budget recommendation
@@ -85,7 +87,7 @@ If these are set, the first deploy (or first start after DB reset) will create t
 
 **For database:**
 
-- **SQLite (simplest, free):** Do **not** set `DB_NAME`. Render’s free tier has ephemeral disk, so data resets on deploy. Fine for testing.
+- **SQLite (simplest, free):** Do **not** set `DB_NAME`. Render’s free tier has ephemeral disk, so data resets on deploy. Fine for testing. **If your admin or other data disappeared after a deploy,** see [Persist admin data (step-by-step)](docs/PERSIST-ADMIN-DATA.md).
 - **PostgreSQL (persistent):** In Render create a **PostgreSQL** database, then add:
   - `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT` from the database’s **Internal Connection String** (use “Internal” so backend and DB are in same network).
 
